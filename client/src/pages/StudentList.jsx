@@ -14,12 +14,12 @@ const StudentList = () => {
     limit: 10,
   });
 
-  const fetchStudents = async (page = 1) => {
+  const fetchStudents = async (page = 1, limit = pagination.limit) => {
     try {
       setLoading(true);
-      const response = await studentApi.getAll(page, pagination.limit);
+      const response = await studentApi.getAll(page, limit);
       setStudents(response.data.data);
-      setPagination(response.data.pagination);
+      setPagination(response.data.pagination); // Ensure pagination metadata is updated
     } catch (error) {
       console.error("Error fetching students:", error);
       Swal.fire({
@@ -69,6 +69,11 @@ const StudentList = () => {
 
   const handlePageChange = (page) => {
     fetchStudents(page);
+  };
+
+  const handleLimitChange = (newLimit) => {
+    setPagination({ ...pagination, limit: newLimit });
+    fetchStudents(1, newLimit); // Reset to page 1 when limit changes
   };
 
   const renderPagination = () => {
@@ -127,9 +132,19 @@ const StudentList = () => {
     <div className="student-list">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Students</h2>
-        <Link to="/students/add" className="btn btn-primary">
-          Add New Student
-        </Link>
+        <div>
+          <label htmlFor="limit" className="me-2">Items per page:</label>
+          <select
+            id="limit"
+            value={pagination.limit}
+            onChange={(e) => handleLimitChange(parseInt(e.target.value))}
+            className="form-select d-inline-block w-auto"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
 
       {loading ? (
