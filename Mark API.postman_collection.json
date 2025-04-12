@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "309dd9a7-bb84-40b0-9132-24b823988700",
+		"name": "Mark API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22184642"
+	},
+	"item": [
+		{
+			"name": "Add Mark",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"student_id\": 1,\n  \"subject_id\": 2,\n  \"score\": 85,\n  \"exam_date\": \"2023-10-01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/marks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"marks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Mark",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"score\": 90,\n  \"exam_date\": \"2023-10-15\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/marks/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"marks",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mark",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/marks/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"marks",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Marks by Student ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/marks/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"marks",
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
