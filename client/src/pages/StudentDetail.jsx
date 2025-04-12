@@ -18,6 +18,7 @@ const StudentDetail = () => {
     score: "",
     exam_date: "",
   });
+  const [editingMark, setEditingMark] = useState(null);
 
   useEffect(() => {
     fetchStudentData();
@@ -119,6 +120,47 @@ const StudentDetail = () => {
         icon: "error",
         title: "Error",
         text: "Failed to delete mark. Please try again later.",
+      });
+    }
+  };
+
+  const handleEditMark = (mark) => {
+    setEditingMark({ ...mark });
+  };
+
+  const handleEditMarkChange = (e) => {
+    const { name, value } = e.target;
+    setEditingMark({
+      ...editingMark,
+      [name]: value,
+    });
+  };
+
+  const handleEditMarkSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await markApi.update(editingMark.id, {
+        score: editingMark.score,
+        exam_date: editingMark.exam_date,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Mark updated successfully",
+      });
+
+      setEditingMark(null);
+      fetchStudentData();
+    } catch (error) {
+      console.error("Error updating mark:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text:
+          error.response?.data?.message ||
+          "Failed to update mark. Please try again later.",
       });
     }
   };
@@ -286,15 +328,55 @@ const StudentDetail = () => {
                         <td>
                           {mark.subject_name} ({mark.subject_code})
                         </td>
-                        <td>{mark.score}</td>
+                        <td>
+                          {editingMark && editingMark.id === mark.id ? (
+                            <input
+                              type="number"
+                              step="0.01"
+                              min="0"
+                              max="100"
+                              className="form-control"
+                              name="score"
+                              value={editingMark.score}
+                              onChange={handleEditMarkChange}
+                            />
+                          ) : (
+                            mark.score
+                          )}
+                        </td>
                         <td>{formatDate(mark.exam_date)}</td>
                         <td>
-                          <button
-                            onClick={() => handleDeleteMark(mark.id)}
-                            className="btn btn-sm btn-danger"
-                          >
-                            Delete
-                          </button>
+                          {editingMark && editingMark.id === mark.id ? (
+                            <>
+                              <button
+                                onClick={handleEditMarkSubmit}
+                                className="btn btn-sm btn-success me-2"
+                              >
+                                Save
+                              </button>
+                              <button
+                                onClick={() => setEditingMark(null)}
+                                className="btn btn-sm btn-secondary"
+                              >
+                                Cancel
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                onClick={() => handleEditMark(mark)}
+                                className="btn btn-sm btn-warning me-2"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => handleDeleteMark(mark.id)}
+                                className="btn btn-sm btn-danger"
+                              >
+                                Delete
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))}
