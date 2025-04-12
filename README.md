@@ -28,7 +28,7 @@ A full-stack MERN application for managing student data and marks.
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/atulnagose149/student-management-system.git
 cd student-management-system
 ```
 
@@ -127,5 +127,7 @@ To use pagination on the student list endpoint:
 ## Author
 
 Atul Nagose
+
 # student-management-system
+
 # student-management-system

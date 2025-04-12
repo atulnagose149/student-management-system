@@ -11,7 +11,7 @@ const StudentList = () => {
     currentPage: 1,
     totalPages: 1,
     totalCount: 0,
-    limit: 10,
+    limit: 5  ,
   });
 
   const fetchStudents = async (page = 1, limit = pagination.limit) => {
@@ -130,16 +130,19 @@ const StudentList = () => {
   // src/pages/StudentList.js (continued)
   return (
     <div className="student-list">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 lg-12">
         <h2>Students</h2>
         <div>
-          <label htmlFor="limit" className="me-2">Items per page:</label>
+          <label htmlFor="limit" className="me-2">
+            Items per page:
+          </label>
           <select
             id="limit"
             value={pagination.limit}
             onChange={(e) => handleLimitChange(parseInt(e.target.value))}
             className="form-select d-inline-block w-auto"
           >
+            <option value="2">2</option>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>

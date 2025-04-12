@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <div className="container mt-4">
+        <div className="container mt-4 lg-12">
           <Routes>
             <Route path="/students" element={<StudentList />} />
             <Route path="/students/add" element={<StudentForm />} />
