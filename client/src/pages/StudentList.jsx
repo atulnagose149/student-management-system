@@ -11,7 +11,7 @@ const StudentList = () => {
     currentPage: 1,
     totalPages: 1,
     totalCount: 0,
-    limit: 5  ,
+    limit: 5,
   });
 
   const fetchStudents = async (page = 1, limit = pagination.limit) => {
