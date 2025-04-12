@@ -1,6 +1,6 @@
 # Student Management System
 
-A full-stack MERN application for managing student data and marks.
+A full-stack PERN application for managing student data and marks.
 
 ## Features
 
